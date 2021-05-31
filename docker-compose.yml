@@ -1,0 +1,22 @@
+version: '3.3'
+
+services: 
+  db_postgres:
+    image: postgres
+    restart: always
+    environment: 
+      POSTGRES_PASSWORD: ${DB_PASS}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - ${DB_PORT}:${DB_PORT}
+    volumes: 
+      - ${DB_VOLUME_PATH}:/var/lib/postgresql/data
+  ui_pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment: 
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASS}
+    ports: 
+      - ${PGADMIN_PORT_OUT}:80
